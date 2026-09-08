@@ -1,127 +1,160 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="UR Learning provides free educational resources in math, science, coding, reading, writing, and robotics.">
-  <title>UR Learning</title>
-  <link rel="icon" href="assets/ur-learning-logo.png">
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UR Learning</title>
+<meta name="description" content="Free learning resources for curious students.">
+<link rel="icon" href="assets/ur-learning-logo.png">
+<style>
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#153968;background:#fff}
+  a{text-decoration:none;color:inherit}
+  img{display:block;max-width:100%}
+  :root{--navy:#0c326b;--blue:#1079ef;--muted:#4b668e;--line:#e5edf6}
+  .container{width:min(1400px,calc(100% - 64px));margin:0 auto}
+
+  /* HEADER */
+  header{height:98px;background:#fff;border-bottom:1px solid #edf1f5;position:relative;z-index:10}
+  .header-inner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:28px}
+  .brand{display:flex;align-items:center;gap:15px;min-width:320px}
+  .brand img{width:92px;height:92px;object-fit:contain}
+  .brand span{font-size:30px;line-height:1;font-weight:800;color:var(--navy);letter-spacing:-.02em}
+  nav{display:flex;align-items:center;gap:33px;font-size:17px;font-weight:500;color:#102f63;white-space:nowrap}
+  nav a{height:98px;display:flex;align-items:center;position:relative;padding:0 1px}
+  nav a.active{color:#0c6fe9}
+  nav a.active:after{content:"";position:absolute;left:0;right:0;bottom:10px;height:3px;background:#157df2;border-radius:3px}
+  .search{width:42px;height:42px;display:grid;place-items:center;color:#12356c;margin-left:8px}
+  .search svg{width:29px;height:29px;stroke:currentColor}
+  .menu{display:none;border:0;background:transparent;color:var(--navy);font-size:28px}
+
+  /* HERO */
+  .hero{height:516px;background:linear-gradient(90deg,#f4fbff 0%,#edf8ff 55%,#f7fcff 100%);overflow:hidden}
+  .hero-inner{height:100%;display:grid;grid-template-columns:58% 42%;align-items:stretch}
+  .hero-copy{display:flex;flex-direction:column;justify-content:center;padding:10px 38px 0 25px}
+  .hero-copy h1{margin:0;color:#0b316c;font-size:74px;line-height:.98;letter-spacing:-3px;font-weight:800;white-space:nowrap}
+  .hero-copy p{font-size:27px;line-height:1.42;margin:24px 0 30px;color:#4c668c;max-width:780px;font-weight:400}
+  .cta{display:inline-flex;align-items:center;gap:15px;width:max-content;background:linear-gradient(135deg,#1884f2,#0c70ec);color:#fff;font-size:22px;font-weight:700;padding:17px 33px;border-radius:14px;box-shadow:0 10px 28px rgba(18,119,234,.22)}
+  .cta:hover{transform:translateY(-1px)}
+  .hero-art{position:relative;overflow:hidden}
+  .hero-art img{width:100%;height:100%;object-fit:cover;object-position:center center}
+  .hero-art:before{content:"";position:absolute;inset:0 auto 0 0;width:21%;background:linear-gradient(90deg,#edf8ff 0%,rgba(237,248,255,.75) 36%,rgba(237,248,255,0) 100%);z-index:1;pointer-events:none}
+
+  /* CARDS */
+  .subjects{position:relative;margin-top:-79px;z-index:5}
+  .cards{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+  .card{height:294px;background:rgba(255,255,255,.97);border:1px solid #e7eef6;border-radius:17px;box-shadow:0 12px 32px rgba(39,88,137,.08);padding:22px 20px 18px;text-align:center;display:flex;flex-direction:column;align-items:center}
+  .icon{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;margin-bottom:14px}
+  .icon svg{width:42px;height:42px;fill:none;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round}
+  .math{background:#dff2ff}.math svg{stroke:#146bd2}
+  .science{background:#e1f7e7}.science svg{stroke:#149057}
+  .coding{background:#fff1ca}.coding svg{stroke:#c97b00}
+  .reading{background:#ffe6e4}.reading svg{stroke:#ca4c3e}
+  .robotics{background:#eee8ff}.robotics svg{stroke:#6b4dc0}
+  .card h2{font-size:22px;color:#0d326b;margin:0 0 10px;line-height:1.1}
+  .card p{font-size:17px;line-height:1.4;color:#4b668d;margin:0;max-width:220px;min-height:72px}
+  .card a{margin-top:auto;color:#0d78ef;font-size:17px;font-weight:700}
+
+  .quote{padding:34px 0 30px;text-align:center;color:#4a6288}
+  .quote-line{display:flex;align-items:center;justify-content:center;gap:24px}
+  .quote-line:before,.quote-line:after{content:"";height:1px;background:#ccdced;flex:1;max-width:170px}
+  .quote p{font-size:19px;font-style:italic;margin:0}
+  .quote div:last-child{font-size:18px;margin-top:2px;color:#37547b}
+
+  .about{padding:72px 0;background:#f8fbff;border-top:1px solid #edf2f7}
+  .about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:80px}
+  .eyebrow{font-size:13px;letter-spacing:.12em;font-weight:800;color:#0d78ef;margin:0 0 10px}
+  .about h2{font-size:45px;line-height:1.05;letter-spacing:-1.5px;color:#0b316c;margin:0}
+  .about p{font-size:20px;line-height:1.7;margin:0;color:#4c668c}
+  footer{background:#0a2148;color:#d9e5f3;padding:26px 0;margin-top:0}
+  .footer-row{display:flex;justify-content:space-between;align-items:center}
+
+  @media(max-width:1180px){
+    .brand{min-width:auto}.brand span{font-size:24px}.brand img{width:78px;height:78px}
+    nav{gap:18px;font-size:15px}.hero-copy h1{font-size:60px}.hero-copy p{font-size:22px}
+    .container{width:min(100% - 36px,1400px)}
+  }
+  @media(max-width:900px){
+    header{height:auto}.header-inner{min-height:80px;flex-wrap:wrap;padding:7px 0}.brand img{width:62px;height:62px}.menu{display:block}
+    nav{display:none;width:100%;flex-direction:column;align-items:flex-start;gap:0;padding:0 0 10px}nav.open{display:flex}nav a{height:auto;padding:9px 0}nav a.active:after{display:none}.search{display:none}
+    .hero{height:auto}.hero-inner{grid-template-columns:1fr}.hero-copy{padding:55px 10px 28px}.hero-copy h1{white-space:normal;font-size:56px}.hero-copy p{font-size:20px}.hero-art{height:390px}
+    .subjects{margin-top:24px}.cards{grid-template-columns:repeat(2,1fr)}.card{height:270px}.quote{padding-top:28px}.about-grid{grid-template-columns:1fr;gap:28px}
+  }
+  @media(max-width:560px){
+    .container{width:calc(100% - 24px)}.brand span{font-size:21px}.hero-copy h1{font-size:46px;letter-spacing:-2px}.hero-copy p{font-size:18px}.cta{font-size:18px;padding:14px 20px}.hero-art{height:280px}.cards{grid-template-columns:1fr}.card{height:255px}.quote-line:before,.quote-line:after{display:none}
+  }
+</style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="wrap header-row">
-      <a class="brand" href="#home">
-        <img src="assets/ur-learning-logo.png" alt="UR Learning logo">
-        <span>UR Learning</span>
-      </a>
+<header>
+  <div class="container header-inner">
+    <a class="brand" href="#home"><img src="assets/ur-learning-logo.png" alt="UR Learning logo"><span>UR Learning</span></a>
+    <button class="menu" aria-label="Open menu" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
+    <nav>
+      <a class="active" href="#home">Home</a>
+      <a href="#math">Math</a>
+      <a href="#science">Science</a>
+      <a href="#coding">Coding</a>
+      <a href="#reading">Reading &amp; Writing</a>
+      <a href="#robotics">Robotics</a>
+      <a href="#about">About</a>
+    </nav>
+    <div class="search" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg></div>
+  </div>
+</header>
 
-      <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
-
-      <nav class="nav" aria-label="Main navigation">
-        <a class="active" href="#home">Home</a>
-        <a href="#math">Math</a>
-        <a href="#science">Science</a>
-        <a href="#coding">Coding</a>
-        <a href="#reading-writing">Reading &amp; Writing</a>
-        <a href="#robotics">Robotics</a>
-        <a href="#about">About</a>
-      </nav>
+<main>
+  <section class="hero" id="home">
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <h1>Learn. Explore. Grow.</h1>
+        <p>UR Learning provides free, high-quality educational resources for curious students who want to explore mathematics, science, coding, reading, writing, and more.</p>
+        <a class="cta" href="#subjects">Explore Resources <span>→</span></a>
+      </div>
+      <div class="hero-art"><img src="assets/hero-learning.png" alt="Globe and books representing learning"></div>
     </div>
-  </header>
+  </section>
 
-  <main>
-    <section id="home" class="hero">
-      <div class="wrap hero-grid">
-        <div class="hero-copy">
-          <h1>Learn. Explore. Grow.</h1>
-          <p>
-            UR Learning provides free, high-quality educational resources for curious students
-            who want to explore mathematics, science, coding, reading, writing, and more.
-          </p>
-          <a class="cta" href="#subjects">Explore Resources <span>→</span></a>
-        </div>
-
-        <div class="hero-visual">
-          <img src="assets/hero-learning.png" alt="Books and globe representing learning">
-        </div>
-      </div>
-    </section>
-
-    <section id="subjects" class="subjects">
-      <div class="wrap">
-        <div class="cards">
-          <article id="math" class="card">
-            <div class="badge math-icon">▦</div>
-            <h2>Mathematics</h2>
-            <p>Build problem-solving skills and explore new concepts.</p>
-            <a href="#">Explore →</a>
-          </article>
-
-          <article id="science" class="card">
-            <div class="badge science-icon">⚗</div>
-            <h2>Science</h2>
-            <p>Discover how the world works.</p>
-            <a href="#">Explore →</a>
-          </article>
-
-          <article id="coding" class="card">
-            <div class="badge coding-icon">⌨</div>
-            <h2>Coding</h2>
-            <p>Learn to create, build, and innovate.</p>
-            <a href="#">Explore →</a>
-          </article>
-
-          <article id="reading-writing" class="card">
-            <div class="badge reading-icon">▤</div>
-            <h2>Reading &amp; Writing</h2>
-            <p>Develop strong reading and writing skills.</p>
-            <a href="#">Explore →</a>
-          </article>
-
-          <article id="robotics" class="card">
-            <div class="badge robotics-icon">⚙</div>
-            <h2>Robotics</h2>
-            <p>Build, program, test, and improve.</p>
-            <a href="#">Explore →</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="quote">
-      <div class="wrap">
-        <p>“Education is the most powerful weapon which you can use to change the world.”</p>
-        <span>— Nelson Mandela</span>
-      </div>
-    </section>
-
-    <section id="about" class="about">
-      <div class="wrap about-grid">
-        <div>
-          <p class="kicker">ABOUT UR LEARNING</p>
-          <h2>Curiosity deserves a place to grow.</h2>
-        </div>
-        <div>
-          <p>
-            UR Learning is a growing collection of free educational resources for students and families.
-            Our goal is to make it easy to find useful material, explore new subjects, and learn at your own pace.
-          </p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="wrap footer-row">
-      <div class="footer-brand">
-        <img src="assets/ur-learning-logo.png" alt="">
-        <strong>UR Learning</strong>
-      </div>
-      <span>© <span id="year"></span> UR Learning</span>
+  <section class="subjects" id="subjects">
+    <div class="container cards">
+      <article class="card" id="math">
+        <div class="icon math"><svg viewBox="0 0 48 48"><rect x="10" y="6" width="28" height="36" rx="2"></rect><rect x="15" y="11" width="18" height="7"></rect><path d="M16 25h3M24 25h3M32 25h1M16 31h3M24 31h3M32 31h1M16 37h3M24 37h3M32 37h1"></path></svg></div>
+        <h2>Mathematics</h2><p>Build problem-solving skills and explore new concepts.</p><a href="#">Explore →</a>
+      </article>
+      <article class="card" id="science">
+        <div class="icon science"><svg viewBox="0 0 48 48"><path d="M19 7h10M21 7v10L11 36a4 4 0 0 0 4 5h18a4 4 0 0 0 4-5L27 17V7"></path><path d="M16 31h16"></path></svg></div>
+        <h2>Science</h2><p>Discover how the world works.</p><a href="#">Explore →</a>
+      </article>
+      <article class="card" id="coding">
+        <div class="icon coding"><svg viewBox="0 0 48 48"><rect x="9" y="10" width="30" height="23" rx="2"></rect><path d="M5 38h38M16 38l2-5h12l2 5"></path></svg></div>
+        <h2>Coding</h2><p>Learn to create, build, and innovate.</p><a href="#">Explore →</a>
+      </article>
+      <article class="card" id="reading">
+        <div class="icon reading"><svg viewBox="0 0 48 48"><path d="M24 38c-3-4-7-6-14-6V9c7 0 11 2 14 6v23Z"></path><path d="M24 38c3-4 7-6 14-6V9c-7 0-11 2-14 6v23Z"></path></svg></div>
+        <h2>Reading &amp; Writing</h2><p>Develop your reading and writing skills.</p><a href="#">Explore →</a>
+      </article>
+      <article class="card" id="robotics">
+        <div class="icon robotics"><svg viewBox="0 0 48 48"><rect x="11" y="14" width="26" height="22" rx="5"></rect><circle cx="19" cy="25" r="2"></circle><circle cx="29" cy="25" r="2"></circle><path d="M18 31h12M24 14V8M20 8h8M7 21h4M37 21h4"></path></svg></div>
+        <h2>Robotics</h2><p>Build, program, test, and improve.</p><a href="#">Explore →</a>
+      </article>
     </div>
-  </footer>
+  </section>
 
-  <script src="script.js"></script>
+  <section class="quote">
+    <div class="container">
+      <div class="quote-line"><p>“Education is the most powerful weapon which you can use to change the world.”</p></div>
+      <div>— Nelson Mandela</div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="container about-grid">
+      <div><p class="eyebrow">ABOUT UR LEARNING</p><h2>Curiosity deserves a place to grow.</h2></div>
+      <p>UR Learning is a growing collection of free educational resources for students and families. Our goal is to make useful learning material easy to find, explore, and enjoy at your own pace.</p>
+    </div>
+  </section>
+</main>
+<footer><div class="container footer-row"><strong>UR Learning</strong><span>© 2026 UR Learning</span></div></footer>
 </body>
 </html>
