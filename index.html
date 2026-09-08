@@ -1,30 +1,175 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <title>UR Learning</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="UR Learning provides free, high-quality educational resources for curious students." />
+  <title>UR Learning</title>
+  <link rel="icon" href="assets/ur-learning-logo.png" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
-    <h1>Welcome to UR Learning</h1>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#home" aria-label="UR Learning home">
+        <img src="assets/ur-learning-logo.png" alt="UR Learning logo" />
+        <span>UR Learning</span>
+      </a>
 
-    <h2>Learn. Explore. Grow.</h2>
+      <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false">☰</button>
 
-    <p>
-        UR Learning provides educational resources for students
-        who want to explore mathematics, science, coding,
-        reading, writing, and more.
-    </p>
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a class="active" href="#home">Home</a>
+        <a href="#math">Math</a>
+        <a href="#science">Science</a>
+        <a href="#coding">Coding</a>
+        <a href="#reading-writing">Reading &amp; Writing</a>
+        <a href="#robotics">Robotics</a>
+        <a href="#about">About</a>
+      </nav>
+    </div>
+  </header>
 
-    <h2>Explore</h2>
+  <main>
+    <section id="home" class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Free learning resources for curious students</p>
+          <h1>Learn. Explore. Grow.</h1>
+          <p class="hero-text">UR Learning provides free, high-quality educational resources for students who want to explore mathematics, science, coding, reading, writing, and more.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#resources">Explore Resources <span aria-hidden="true">→</span></a>
+            <a class="button secondary" href="#about">About UR Learning</a>
+          </div>
+        </div>
 
-    <ul>
-        <li>Mathematics</li>
-        <li>Science</li>
-        <li>Coding</li>
-        <li>Reading & Writing</li>
-        <li>Robotics</li>
-    </ul>
+        <div class="hero-art" aria-label="Illustration of books and a globe">
+          <div class="sun"><span></span><span></span><span></span><span></span></div>
+          <div class="globe">
+            <div class="globe-grid"></div>
+            <div class="continent one"></div>
+            <div class="continent two"></div>
+          </div>
+          <div class="book-stack">
+            <div class="book b1"><span>Mathematics</span></div>
+            <div class="book b2"><span>Science</span></div>
+            <div class="book b3"><span>Coding</span></div>
+            <div class="book b4"><span>Reading</span></div>
+            <div class="book b5"><span>Writing</span></div>
+          </div>
+          <p class="art-note">A brighter future<br />through learning</p>
+        </div>
+      </div>
+    </section>
 
-    <p>More resources are coming soon!</p>
+    <section id="resources" class="resources-section">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Choose a subject</p>
+          <h2>Explore UR Learning</h2>
+          <p>Start with a subject below. Each section can grow into its own collection of lessons, links, practice problems, and guides.</p>
+        </div>
+
+        <div class="resource-grid">
+          <article id="math" class="resource-card">
+            <div class="icon blue">∑</div>
+            <h3>Mathematics</h3>
+            <p>Build problem-solving skills and explore new concepts in arithmetic, algebra, geometry, and competition math.</p>
+            <a href="#math-content">Explore <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article id="science" class="resource-card">
+            <div class="icon green">⚗</div>
+            <h3>Science</h3>
+            <p>Discover how the world works through physics, chemistry, biology, and hands-on scientific thinking.</p>
+            <a href="#science-content">Explore <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article id="coding" class="resource-card">
+            <div class="icon gold">⌘</div>
+            <h3>Coding</h3>
+            <p>Learn to create, build, and innovate with beginner-friendly programming, algorithms, and projects.</p>
+            <a href="#coding-content">Explore <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article id="reading-writing" class="resource-card">
+            <div class="icon coral">✎</div>
+            <h3>Reading &amp; Writing</h3>
+            <p>Develop strong reading comprehension, creative writing, vocabulary, and communication skills.</p>
+            <a href="#reading-content">Explore <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article id="robotics" class="resource-card">
+            <div class="icon purple">★</div>
+            <h3>Robotics</h3>
+            <p>Explore robotics, engineering, electronics, programming, and hands-on building projects.</p>
+            <a href="#robotics-content">Explore <span aria-hidden="true">→</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="quote-section">
+      <div class="container">
+        <blockquote>“Education is the most powerful weapon which you can use to change the world.”</blockquote>
+        <p>— Nelson Mandela</p>
+      </div>
+    </section>
+
+    <section class="content-preview">
+      <div class="container preview-grid">
+        <div id="math-content" class="preview-card">
+          <span class="mini-label">MATHEMATICS</span>
+          <h3>Coming first</h3>
+          <p>Add your favorite math lessons, problem-solving guides, AoPS resources, competition prep, and practice sets here.</p>
+        </div>
+        <div id="science-content" class="preview-card">
+          <span class="mini-label">SCIENCE</span>
+          <h3>Build a science library</h3>
+          <p>Create collections for physics, chemistry, biology, experiments, books, videos, and study plans.</p>
+        </div>
+        <div id="coding-content" class="preview-card">
+          <span class="mini-label">CODING</span>
+          <h3>Learn by building</h3>
+          <p>Organize coding tutorials, project ideas, Scratch/Python resources, and contest preparation.</p>
+        </div>
+        <div id="reading-content" class="preview-card">
+          <span class="mini-label">READING &amp; WRITING</span>
+          <h3>Read deeply, write clearly</h3>
+          <p>Collect book lists, writing prompts, vocabulary, essay help, and creative writing resources.</p>
+        </div>
+        <div id="robotics-content" class="preview-card">
+          <span class="mini-label">ROBOTICS</span>
+          <h3>Build, code, and create</h3>
+          <p>Explore robotics projects, LEGO robotics, Arduino, sensors, engineering challenges, and programming resources.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about-section">
+      <div class="container about-grid">
+        <div>
+          <p class="eyebrow">About</p>
+          <h2>Learning should feel open and exciting.</h2>
+        </div>
+        <div>
+          <p>UR Learning is a growing educational resource site designed to help students and families find useful, understandable learning materials in one place.</p>
+          <p>This starter version is intentionally simple. You can keep adding lessons, recommendations, downloadable resources, and full subject pages as the site grows.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="assets/ur-learning-logo.png" alt="" />
+        <div><strong>UR Learning</strong><br /><span>Learn. Explore. Grow.</span></div>
+      </div>
+      <p>© <span id="year"></span> UR Learning. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
