@@ -1,160 +1,280 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>UR Learning</title>
-<meta name="description" content="Free learning resources for curious students.">
-<link rel="icon" href="assets/ur-learning-logo.png">
-<style>
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#153968;background:#fff}
-  a{text-decoration:none;color:inherit}
-  img{display:block;max-width:100%}
-  :root{--navy:#0c326b;--blue:#1079ef;--muted:#4b668e;--line:#e5edf6}
-  .container{width:min(1400px,calc(100% - 64px));margin:0 auto}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="UR Learning — free educational resources for curious students." />
+  <title>UR Learning</title>
+  <link rel="icon" href="assets/ur-learning-logo.png" />
+  <style>
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    :root{
+      --navy:#0c3472;
+      --blue:#147df3;
+      --body:#4b6794;
+      --line:#e6edf6;
+      --pale:#f2faff;
+    }
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--body);
+      background:#fff;
+    }
+    a{text-decoration:none;color:inherit}
+    img{display:block;max-width:100%}
+    .wrap{width:min(1450px, calc(100% - 64px));margin:0 auto}
 
-  /* HEADER */
-  header{height:98px;background:#fff;border-bottom:1px solid #edf1f5;position:relative;z-index:10}
-  .header-inner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:28px}
-  .brand{display:flex;align-items:center;gap:15px;min-width:320px}
-  .brand img{width:92px;height:92px;object-fit:contain}
-  .brand span{font-size:30px;line-height:1;font-weight:800;color:var(--navy);letter-spacing:-.02em}
-  nav{display:flex;align-items:center;gap:33px;font-size:17px;font-weight:500;color:#102f63;white-space:nowrap}
-  nav a{height:98px;display:flex;align-items:center;position:relative;padding:0 1px}
-  nav a.active{color:#0c6fe9}
-  nav a.active:after{content:"";position:absolute;left:0;right:0;bottom:10px;height:3px;background:#157df2;border-radius:3px}
-  .search{width:42px;height:42px;display:grid;place-items:center;color:#12356c;margin-left:8px}
-  .search svg{width:29px;height:29px;stroke:currentColor}
-  .menu{display:none;border:0;background:transparent;color:var(--navy);font-size:28px}
+    /* header */
+    header{
+      height:102px;
+      background:white;
+      border-bottom:1px solid #edf1f5;
+      position:sticky;
+      top:0;
+      z-index:50;
+    }
+    .header-inner{
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:32px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-width:max-content;
+      color:#0a2e67;
+      font-size:28px;
+      font-weight:800;
+      letter-spacing:-.02em;
+    }
+    .brand img{width:88px;height:88px;object-fit:contain}
+    nav{display:flex;align-items:center;gap:34px;color:#0c2e65;font-weight:650;font-size:17px}
+    nav a{position:relative;padding:39px 0 33px}
+    nav a::after{
+      content:"";
+      position:absolute;
+      left:0;right:0;bottom:18px;height:3px;border-radius:6px;
+      background:var(--blue);transform:scaleX(0);transition:.18s ease;
+    }
+    nav a:hover::after,nav a.active::after{transform:scaleX(1)}
+    .search-icon{width:28px;height:28px;border:3px solid #0b2d63;border-radius:50%;position:relative;margin-left:10px;flex:0 0 auto}
+    .search-icon::after{content:"";position:absolute;width:12px;height:3px;background:#0b2d63;right:-9px;bottom:-5px;transform:rotate(45deg);border-radius:3px}
+    .menu-btn{display:none;border:0;background:none;color:var(--navy);font-size:30px;padding:8px}
 
-  /* HERO */
-  .hero{height:516px;background:linear-gradient(90deg,#f4fbff 0%,#edf8ff 55%,#f7fcff 100%);overflow:hidden}
-  .hero-inner{height:100%;display:grid;grid-template-columns:58% 42%;align-items:stretch}
-  .hero-copy{display:flex;flex-direction:column;justify-content:center;padding:10px 38px 0 25px}
-  .hero-copy h1{margin:0;color:#0b316c;font-size:74px;line-height:.98;letter-spacing:-3px;font-weight:800;white-space:nowrap}
-  .hero-copy p{font-size:27px;line-height:1.42;margin:24px 0 30px;color:#4c668c;max-width:780px;font-weight:400}
-  .cta{display:inline-flex;align-items:center;gap:15px;width:max-content;background:linear-gradient(135deg,#1884f2,#0c70ec);color:#fff;font-size:22px;font-weight:700;padding:17px 33px;border-radius:14px;box-shadow:0 10px 28px rgba(18,119,234,.22)}
-  .cta:hover{transform:translateY(-1px)}
-  .hero-art{position:relative;overflow:hidden}
-  .hero-art img{width:100%;height:100%;object-fit:cover;object-position:center center}
-  .hero-art:before{content:"";position:absolute;inset:0 auto 0 0;width:21%;background:linear-gradient(90deg,#edf8ff 0%,rgba(237,248,255,.75) 36%,rgba(237,248,255,0) 100%);z-index:1;pointer-events:none}
+    /* hero */
+    .hero{
+      position:relative;
+      overflow:hidden;
+      background:linear-gradient(90deg,#f6fcff 0%,#edf8ff 50%,#eef9ff 100%);
+      min-height:575px;
+    }
+    .hero-bg{
+      position:absolute;
+      inset:0 0 0 42%;
+      background-image:
+        linear-gradient(90deg,
+          #eef9ff 0%,
+          rgba(238,249,255,.98) 3%,
+          rgba(238,249,255,.82) 6%,
+          rgba(238,249,255,.52) 8.5%,
+          rgba(238,249,255,.22) 10.5%,
+          rgba(238,249,255,0) 12.5%),
+        url('assets/hero-scene.png');
+      background-repeat:no-repeat;
+      background-position:left center, calc(100% + 8px) center;
+      background-size:100% 100%, cover;
+      pointer-events:none;
+    }
+    .hero-inner{position:relative;z-index:2;min-height:575px;display:flex;align-items:center}
+    .hero-copy{width:53%;padding:56px 0 92px 0}
+    .hero h1{
+      margin:0;
+      color:#0a3373;
+      font-size:clamp(66px,6.2vw,102px);
+      line-height:.97;
+      letter-spacing:-.055em;
+      max-width:780px;
+      font-weight:800;
+    }
+    .hero p{
+      margin:24px 0 26px;
+      max-width:720px;
+      font-size:23px;
+      line-height:1.46;
+      color:#4c6794;
+    }
+    .cta{
+      display:inline-flex;
+      align-items:center;
+      gap:14px;
+      background:linear-gradient(135deg,#1784f7,#126fe7);
+      color:white;
+      font-size:20px;
+      font-weight:800;
+      padding:18px 30px;
+      border-radius:14px;
+      box-shadow:0 11px 28px rgba(20,125,243,.20);
+      transition:transform .15s ease;
+    }
+    .cta:hover{transform:translateY(-2px)}
 
-  /* CARDS */
-  .subjects{position:relative;margin-top:-79px;z-index:5}
-  .cards{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
-  .card{height:294px;background:rgba(255,255,255,.97);border:1px solid #e7eef6;border-radius:17px;box-shadow:0 12px 32px rgba(39,88,137,.08);padding:22px 20px 18px;text-align:center;display:flex;flex-direction:column;align-items:center}
-  .icon{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;margin-bottom:14px}
-  .icon svg{width:42px;height:42px;fill:none;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round}
-  .math{background:#dff2ff}.math svg{stroke:#146bd2}
-  .science{background:#e1f7e7}.science svg{stroke:#149057}
-  .coding{background:#fff1ca}.coding svg{stroke:#c97b00}
-  .reading{background:#ffe6e4}.reading svg{stroke:#ca4c3e}
-  .robotics{background:#eee8ff}.robotics svg{stroke:#6b4dc0}
-  .card h2{font-size:22px;color:#0d326b;margin:0 0 10px;line-height:1.1}
-  .card p{font-size:17px;line-height:1.4;color:#4b668d;margin:0;max-width:220px;min-height:72px}
-  .card a{margin-top:auto;color:#0d78ef;font-size:17px;font-weight:700}
+    /* cards overlap hero */
+    .subjects{position:relative;z-index:5;margin-top:-70px;padding-bottom:36px}
+    .cards{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+    .card{
+      min-height:280px;
+      background:#fff;
+      border:1px solid #e8eef6;
+      border-radius:16px;
+      padding:18px 18px 22px;
+      text-align:center;
+      box-shadow:0 14px 34px rgba(42,84,126,.08);
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    .card:hover{transform:translateY(-4px);box-shadow:0 18px 38px rgba(42,84,126,.13)}
+    .icon{
+      width:74px;height:74px;border-radius:50%;margin:0 auto 15px;
+      display:grid;place-items:center;font-size:36px;font-weight:700;
+    }
+    .math{background:#dff2ff;color:#1677d6}.science{background:#e2f7e8;color:#189255}.coding{background:#fff0c9;color:#c77b00}.reading{background:#ffe6e3;color:#d04c3b}.robotics{background:#eee8ff;color:#704cc9}
+    .card h2{margin:0 0 10px;color:#0a3473;font-size:22px;line-height:1.15}
+    .card p{margin:0 auto;max-width:230px;min-height:72px;color:#506b95;font-size:16px;line-height:1.45}
+    .card a{display:inline-block;margin-top:13px;color:#0c7cf0;font-size:17px;font-weight:800}
 
-  .quote{padding:34px 0 30px;text-align:center;color:#4a6288}
-  .quote-line{display:flex;align-items:center;justify-content:center;gap:24px}
-  .quote-line:before,.quote-line:after{content:"";height:1px;background:#ccdced;flex:1;max-width:170px}
-  .quote p{font-size:19px;font-style:italic;margin:0}
-  .quote div:last-child{font-size:18px;margin-top:2px;color:#37547b}
+    .quote{padding:3px 0 48px;text-align:center;color:#4a6692}
+    .quote-inner{display:flex;align-items:center;gap:28px;justify-content:center}
+    .quote-line{height:1px;background:#cddded;width:120px}
+    blockquote{margin:0;font-size:19px;font-style:italic;line-height:1.4}
+    blockquote span{display:block;color:#193f78}
 
-  .about{padding:72px 0;background:#f8fbff;border-top:1px solid #edf2f7}
-  .about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:80px}
-  .eyebrow{font-size:13px;letter-spacing:.12em;font-weight:800;color:#0d78ef;margin:0 0 10px}
-  .about h2{font-size:45px;line-height:1.05;letter-spacing:-1.5px;color:#0b316c;margin:0}
-  .about p{font-size:20px;line-height:1.7;margin:0;color:#4c668c}
-  footer{background:#0a2148;color:#d9e5f3;padding:26px 0;margin-top:0}
-  .footer-row{display:flex;justify-content:space-between;align-items:center}
+    footer{padding:28px 0;background:#0a234e;color:#d7e3f0}
+    .footer-inner{display:flex;justify-content:space-between;align-items:center;gap:20px}
 
-  @media(max-width:1180px){
-    .brand{min-width:auto}.brand span{font-size:24px}.brand img{width:78px;height:78px}
-    nav{gap:18px;font-size:15px}.hero-copy h1{font-size:60px}.hero-copy p{font-size:22px}
-    .container{width:min(100% - 36px,1400px)}
-  }
-  @media(max-width:900px){
-    header{height:auto}.header-inner{min-height:80px;flex-wrap:wrap;padding:7px 0}.brand img{width:62px;height:62px}.menu{display:block}
-    nav{display:none;width:100%;flex-direction:column;align-items:flex-start;gap:0;padding:0 0 10px}nav.open{display:flex}nav a{height:auto;padding:9px 0}nav a.active:after{display:none}.search{display:none}
-    .hero{height:auto}.hero-inner{grid-template-columns:1fr}.hero-copy{padding:55px 10px 28px}.hero-copy h1{white-space:normal;font-size:56px}.hero-copy p{font-size:20px}.hero-art{height:390px}
-    .subjects{margin-top:24px}.cards{grid-template-columns:repeat(2,1fr)}.card{height:270px}.quote{padding-top:28px}.about-grid{grid-template-columns:1fr;gap:28px}
-  }
-  @media(max-width:560px){
-    .container{width:calc(100% - 24px)}.brand span{font-size:21px}.hero-copy h1{font-size:46px;letter-spacing:-2px}.hero-copy p{font-size:18px}.cta{font-size:18px;padding:14px 20px}.hero-art{height:280px}.cards{grid-template-columns:1fr}.card{height:255px}.quote-line:before,.quote-line:after{display:none}
-  }
-</style>
+    @media (max-width:1180px){
+      .wrap{width:min(100% - 36px,1450px)}
+      nav{gap:18px;font-size:15px}
+      .brand{font-size:24px}.brand img{width:74px;height:74px}
+      .hero-copy{width:58%}.hero h1{font-size:72px}.hero p{font-size:20px}
+      .hero-bg{inset:0 0 0 38%}
+      .cards{grid-template-columns:repeat(3,1fr)}
+      .subjects{margin-top:-52px}
+    }
+    @media (max-width:840px){
+      header{height:82px}.brand img{width:62px;height:62px}.brand{font-size:21px}
+      .menu-btn{display:block}
+      .search-icon{display:none}
+      nav{display:none;position:absolute;top:82px;left:18px;right:18px;background:white;border:1px solid var(--line);border-radius:14px;padding:12px;box-shadow:0 16px 36px rgba(24,61,102,.14);flex-direction:column;align-items:stretch}
+      nav.open{display:flex}
+      nav a{padding:11px 14px}nav a::after{display:none}
+      .hero{min-height:auto;padding-bottom:0}
+      .hero-bg{position:absolute;inset:auto 0 0 0;height:360px;background-image:linear-gradient(180deg,#eef9ff 0%,rgba(238,249,255,.2) 22%,rgba(238,249,255,0) 50%),url('assets/hero-scene.png');background-position:center,center;background-size:100% 100%,cover}
+      .hero-inner{min-height:750px;align-items:flex-start}
+      .hero-copy{width:100%;padding:58px 0 390px}
+      .hero h1{font-size:62px;max-width:620px}.hero p{font-size:19px;max-width:620px}
+      .subjects{margin-top:-36px}.cards{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:560px){
+      .wrap{width:min(100% - 24px,1450px)}
+      .brand span{font-size:19px}.brand img{width:54px;height:54px}
+      .hero-inner{min-height:700px}.hero-copy{padding-top:42px}
+      .hero h1{font-size:49px}.hero p{font-size:17px}.cta{font-size:17px;padding:15px 22px}
+      .cards{grid-template-columns:1fr}.subjects{margin-top:-24px}.card{min-height:0}
+      .quote-line{display:none}.quote{padding-top:12px}.footer-inner{flex-direction:column;align-items:flex-start}
+    }
+  </style>
 </head>
 <body>
-<header>
-  <div class="container header-inner">
-    <a class="brand" href="#home"><img src="assets/ur-learning-logo.png" alt="UR Learning logo"><span>UR Learning</span></a>
-    <button class="menu" aria-label="Open menu" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
-    <nav>
-      <a class="active" href="#home">Home</a>
-      <a href="#math">Math</a>
-      <a href="#science">Science</a>
-      <a href="#coding">Coding</a>
-      <a href="#reading">Reading &amp; Writing</a>
-      <a href="#robotics">Robotics</a>
-      <a href="#about">About</a>
-    </nav>
-    <div class="search" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg></div>
-  </div>
-</header>
+  <header>
+    <div class="wrap header-inner">
+      <a class="brand" href="#home" aria-label="UR Learning home">
+        <img src="assets/ur-learning-logo.png" alt="UR Learning logo" />
+        <span>UR Learning</span>
+      </a>
+      <button class="menu-btn" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
+      <nav aria-label="Main navigation">
+        <a class="active" href="#home">Home</a>
+        <a href="#math">Math</a>
+        <a href="#science">Science</a>
+        <a href="#coding">Coding</a>
+        <a href="#reading">Reading &amp; Writing</a>
+        <a href="#robotics">Robotics</a>
+        <a href="#about">About</a>
+      </nav>
+      <span class="search-icon" aria-hidden="true"></span>
+    </div>
+  </header>
 
-<main>
-  <section class="hero" id="home">
-    <div class="container hero-inner">
-      <div class="hero-copy">
-        <h1>Learn. Explore. Grow.</h1>
-        <p>UR Learning provides free, high-quality educational resources for curious students who want to explore mathematics, science, coding, reading, writing, and more.</p>
-        <a class="cta" href="#subjects">Explore Resources <span>→</span></a>
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <h1>Learn. Explore.<br>Grow.</h1>
+          <p>UR Learning provides free, high-quality educational resources for curious students who want to explore mathematics, science, coding, reading, writing, and more.</p>
+          <a class="cta" href="#subjects">Explore Resources <span>→</span></a>
+        </div>
       </div>
-      <div class="hero-art"><img src="assets/hero-learning.png" alt="Globe and books representing learning"></div>
-    </div>
-  </section>
+    </section>
 
-  <section class="subjects" id="subjects">
-    <div class="container cards">
-      <article class="card" id="math">
-        <div class="icon math"><svg viewBox="0 0 48 48"><rect x="10" y="6" width="28" height="36" rx="2"></rect><rect x="15" y="11" width="18" height="7"></rect><path d="M16 25h3M24 25h3M32 25h1M16 31h3M24 31h3M32 31h1M16 37h3M24 37h3M32 37h1"></path></svg></div>
-        <h2>Mathematics</h2><p>Build problem-solving skills and explore new concepts.</p><a href="#">Explore →</a>
-      </article>
-      <article class="card" id="science">
-        <div class="icon science"><svg viewBox="0 0 48 48"><path d="M19 7h10M21 7v10L11 36a4 4 0 0 0 4 5h18a4 4 0 0 0 4-5L27 17V7"></path><path d="M16 31h16"></path></svg></div>
-        <h2>Science</h2><p>Discover how the world works.</p><a href="#">Explore →</a>
-      </article>
-      <article class="card" id="coding">
-        <div class="icon coding"><svg viewBox="0 0 48 48"><rect x="9" y="10" width="30" height="23" rx="2"></rect><path d="M5 38h38M16 38l2-5h12l2 5"></path></svg></div>
-        <h2>Coding</h2><p>Learn to create, build, and innovate.</p><a href="#">Explore →</a>
-      </article>
-      <article class="card" id="reading">
-        <div class="icon reading"><svg viewBox="0 0 48 48"><path d="M24 38c-3-4-7-6-14-6V9c7 0 11 2 14 6v23Z"></path><path d="M24 38c3-4 7-6 14-6V9c-7 0-11 2-14 6v23Z"></path></svg></div>
-        <h2>Reading &amp; Writing</h2><p>Develop your reading and writing skills.</p><a href="#">Explore →</a>
-      </article>
-      <article class="card" id="robotics">
-        <div class="icon robotics"><svg viewBox="0 0 48 48"><rect x="11" y="14" width="26" height="22" rx="5"></rect><circle cx="19" cy="25" r="2"></circle><circle cx="29" cy="25" r="2"></circle><path d="M18 31h12M24 14V8M20 8h8M7 21h4M37 21h4"></path></svg></div>
-        <h2>Robotics</h2><p>Build, program, test, and improve.</p><a href="#">Explore →</a>
-      </article>
-    </div>
-  </section>
+    <section class="subjects" id="subjects">
+      <div class="wrap cards">
+        <article class="card" id="math">
+          <div class="icon math">▦</div>
+          <h2>Mathematics</h2>
+          <p>Build problem-solving skills and explore new concepts.</p>
+          <a href="#">Explore →</a>
+        </article>
+        <article class="card" id="science">
+          <div class="icon science">⚗</div>
+          <h2>Science</h2>
+          <p>Discover how the world works.</p>
+          <a href="#">Explore →</a>
+        </article>
+        <article class="card" id="coding">
+          <div class="icon coding">⌨</div>
+          <h2>Coding</h2>
+          <p>Learn to create, build, and innovate.</p>
+          <a href="#">Explore →</a>
+        </article>
+        <article class="card" id="reading">
+          <div class="icon reading">▤</div>
+          <h2>Reading &amp; Writing</h2>
+          <p>Develop your reading and writing skills.</p>
+          <a href="#">Explore →</a>
+        </article>
+        <article class="card" id="robotics">
+          <div class="icon robotics">⚙</div>
+          <h2>Robotics</h2>
+          <p>Build, program, test, and improve.</p>
+          <a href="#">Explore →</a>
+        </article>
+      </div>
+    </section>
 
-  <section class="quote">
-    <div class="container">
-      <div class="quote-line"><p>“Education is the most powerful weapon which you can use to change the world.”</p></div>
-      <div>— Nelson Mandela</div>
-    </div>
-  </section>
+    <section class="quote" id="about">
+      <div class="wrap quote-inner">
+        <div class="quote-line"></div>
+        <blockquote>“Education is the most powerful weapon which you can use to change the world.”<span>— Nelson Mandela</span></blockquote>
+        <div class="quote-line"></div>
+      </div>
+    </section>
+  </main>
 
-  <section class="about" id="about">
-    <div class="container about-grid">
-      <div><p class="eyebrow">ABOUT UR LEARNING</p><h2>Curiosity deserves a place to grow.</h2></div>
-      <p>UR Learning is a growing collection of free educational resources for students and families. Our goal is to make useful learning material easy to find, explore, and enjoy at your own pace.</p>
-    </div>
-  </section>
-</main>
-<footer><div class="container footer-row"><strong>UR Learning</strong><span>© 2026 UR Learning</span></div></footer>
+  <footer>
+    <div class="wrap footer-inner"><strong>UR Learning</strong><span>© <span id="year"></span> UR Learning</span></div>
+  </footer>
+
+  <script>
+    const btn=document.querySelector('.menu-btn');
+    const nav=document.querySelector('nav');
+    btn?.addEventListener('click',()=>{const open=nav.classList.toggle('open');btn.setAttribute('aria-expanded',open?'true':'false')});
+    nav?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');btn?.setAttribute('aria-expanded','false')}));
+    document.getElementById('year').textContent=new Date().getFullYear();
+  </script>
 </body>
 </html>
